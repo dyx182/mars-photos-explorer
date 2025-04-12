@@ -1,8 +1,6 @@
 package db;
 import lombok.AllArgsConstructor;
 import model.Photo;
-import model.Rover;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

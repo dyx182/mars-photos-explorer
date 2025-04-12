@@ -4,7 +4,6 @@ import api.NasaApiClient;
 import db.PhotoDao;
 import lombok.AllArgsConstructor;
 import model.Photo;
-import model.Rover;
 
 import java.sql.SQLException;
 import java.util.List;
