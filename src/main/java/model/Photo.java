@@ -14,9 +14,9 @@ public class Photo {
 
     private int id;
     private int sol;
-    private String camera;
+    private String cameraName;
     private String img_src;
-    private Rover rover;
+    private String rover;
 
 
 }

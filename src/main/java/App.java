@@ -22,7 +22,7 @@ public class App {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("Выберите  CURIOSITY, PERSEVERANCE, OPPORTUNITY, SPIRIT");
-            Rover rover = Rover.valueOf(scanner.next().toUpperCase());
+            String rover = scanner.next();
 
             System.out.println("Укажите сол");
             int sol = scanner.nextInt();
@@ -35,7 +35,7 @@ public class App {
 
             List<Photo> photos = service.getPhoto(rover, sol, camera);
             for (Photo  photo : photos) {
-                System.out.println(photo);
+                System.out.println(photo.getImg_src());
             }
         }
         catch (Exception e) {

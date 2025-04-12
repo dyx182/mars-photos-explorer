@@ -9,17 +9,21 @@ public class DataBase {
 
     private static final String DB_URL = "jdbc:h2:file:./db/mars_photos;DB_CLOSE_DELAY=-1";
     private static final String INIT_SCRIPT = """
-            CREATE TABLE IF NOT EXISTS photos (
+            CREATE TABLE IF NOT EXISTS photos_metadata (
                 id INT PRIMARY KEY,
                 sol INT NOT NULL,
                 camera VARCHAR(50) NOT NULL,
-                img_src VARCHAR(255) NOT NULL,
                 rover VARCHAR(20) NOT NULL
+            );
+            
+            CREATE TABLE IF NOT EXISTS photo_urls (
+                id INT PRIMARY KEY,
+                img_src VARCHAR(255) NOT NULL,
+                FOREIGN KEY (id) REFERENCES photos_metadata(id)
             );
             """;
 
-    private DataBase() {
-    } // Запрещаем создание экземпляров
+    private DataBase() {}
 
     public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(DB_URL, "sa", "");

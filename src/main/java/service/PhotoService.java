@@ -15,20 +15,26 @@ public class PhotoService {
     private final NasaApiClient nasaApiClient;
     private final PhotoDao photoDao;
 
-    public List<Photo> getPhoto(Rover rover, int sol, String camera) {
+    public List<Photo> getPhoto(String rover, int sol, String camera) {
 
         try {
-            List<Photo> cashedPhoto = photoDao.getPhotoFromBase(rover, sol, camera);
-            if(!cashedPhoto.isEmpty()) {
-                return cashedPhoto;
+            List<Photo> cashedPhotos = photoDao.getPhotoFromBase(rover, sol, camera);
+            if(!cashedPhotos.isEmpty()) {
+                return cashedPhotos;
             }
             else {
-                List<Photo> newPhoto = nasaApiClient.getPhotos(rover, sol, camera);
-                photoDao.savePhoto(newPhoto);
-                return newPhoto;
+                List<Photo> newPhotos = nasaApiClient.getPhotos(rover, sol, camera);
+                if (newPhotos != null && !newPhotos.isEmpty()) {
+                    photoDao.savePhoto(newPhotos);
+                }
+                return newPhotos;
             }
         }
         catch (SQLException e) {
+            System.err.println("SQL State: " + e.getSQLState());
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("Message: " + e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException("Ошибка работы с БД", e);
         }
     }
