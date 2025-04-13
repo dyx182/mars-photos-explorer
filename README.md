@@ -43,8 +43,8 @@ API error handling and network issue management
 User input validation
 Console error logging
 
-## Key Learning Aspects
-The project helps in mastering:
+## The project helps in mastering:
+
 
 Working with external REST APIs
 Implementing data caching
