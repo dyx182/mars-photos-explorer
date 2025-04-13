@@ -5,6 +5,7 @@ import model.Photo;
 import service.PhotoService;
 
 import java.sql.Connection;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,23 +22,32 @@ public class App {
 
             Scanner scanner = new Scanner(System.in);
 
-            String rover = scannerSetRover(scanner);
-            scanner.nextLine();
-            String camera = scannerSetCamera(scanner);
-
-            //TODO в зависимости от марсохода сделать возможность ввода камер
-
             while (true) {
-                int sol = scannerSetSol(scanner);
+                String rover = scannerSetRover(scanner);
                 scanner.nextLine();
-                List<Photo> photos = service.getPhoto(rover, sol, camera);
+                String camera = scannerSetCamera(scanner, rover);
+                boolean check = false;
 
-                if (!photos.isEmpty()) {
-                    for (Photo photo : photos) {
-                        System.out.println(photo.getImg_src());
+                int attempts = 3;
+                while (attempts-- > 0) {
+                    int sol = scannerSetSol(scanner);
+                    scanner.nextLine();
+                    List<Photo> photos = service.getPhoto(rover, sol, camera);
+                    if (!photos.isEmpty()) {
+                        for (Photo photo : photos) {
+                            System.out.println(photo.getImg_src());
+                        }
+                        check = true;
+                        break;
+                    } else {
+                        System.out.println("Фото не найдено");
                     }
+                }
+                if (!check) {
+                    System.out.println("Фото по заданным параемтрам не найдены, выберите другие данные \n");
+
                 } else {
-                    System.out.println("Фото не найдено, выберите другой sol");
+                    break;
                 }
             }
         } catch (Exception e) {
@@ -46,7 +56,7 @@ public class App {
     }
 
     private static String scannerSetRover(Scanner scanner) {
-        System.out.println("Выберите  CURIOSITY, PERSEVERANCE, OPPORTUNITY, SPIRIT");
+        System.out.println("Выберите ровер " + Arrays.toString(Rovers.values()));
         return scanner.next();
     }
 
@@ -55,8 +65,29 @@ public class App {
         return scanner.nextInt();
     }
 
-    private static String scannerSetCamera(Scanner scanner) {
-        System.out.println("Укажите Камеру");
+    private static String scannerSetCamera(Scanner scanner, String rover) {
+        switch (rover) {
+            case "CURIOSITY":
+                System.out.println("Выберите Камеру" + Arrays.asList(CuriosityCams.values()));
+                break;
+            case "PERSEVERANCE", "SPIRIT":
+                System.out.println("Выберите Камеру" + Arrays.asList(OpportunitySpiritCams.values()));
+                break;
+        }
         return scanner.nextLine();
+    }
+
+    private enum Rovers {
+        CURIOSITY,
+        OPPORTUNITY,
+        SPIRIT
+    }
+
+    private enum CuriosityCams {
+        FHAZ, RHAZ, MAST, CHEMCAM, MAHLI, MARDI, NAVCAM
+    }
+
+    private enum OpportunitySpiritCams {
+        FHAZ, RHAZ, NAVCAM, PANCAM, MINITES
     }
 }
