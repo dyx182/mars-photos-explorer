@@ -27,10 +27,10 @@
 1. Клонировать репозиторий:
    git clone https://github.com/ваш-username/mars-photos-explorer.git
 
-Mars Photos Explorer
+# Mars Photos Explorer
 A console application for searching Mars surface photos by specified parameters using NASA's official API. The project implements data caching in a local H2 database to reduce API requests.
 
-Tech Stack
+## Tech Stack
 Java 17
 RestAssured - for working with NASA API
 H2 Database - embedded DBMS for caching
@@ -38,13 +38,13 @@ Lombok - for reducing boilerplate code
 Gson - for JSON processing
 JDBC - for database operations
 
-Implementation Features
+## Implementation Features
 Data caching
 API error handling and network issue management
 User input validation
 Console error logging
-Key Learning Aspects
 
+## Key Learning Aspects
 The project helps in mastering:
 
 Working with external REST APIs
@@ -52,8 +52,7 @@ Implementing data caching
 JDBC fundamentals
 Exception handling
 
-Installation & Launch
+## Installation & Launch
 Clone the repository:
-
 Copy
 git clone https://github.com/your-username/mars-photos-explorer.git
