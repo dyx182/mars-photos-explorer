@@ -2,6 +2,19 @@
 
 Консольное приложение для поиска фотографий поверхности Марса по заданным параметрам, использующее официальное API NASA. Проект реализует кеширование данных в локальной БД H2 для уменьшения количества запросов к API.
 
+## Установка и запуск
+1. Клонировать репозиторий:
+   git clone https://github.com/ваш-username/mars-photos-explorer.git
+2. Запустить клаасс App в любой IDE
+
+![](/docs/image/запуск.png)
+
+3. Ввести в консоли данные, согласно подсказкам.
+
+![](/docs/image/консоль.png)
+
+4. Ссылку можно открыть в любом браузере
+
 ## Технологический стек
 - **Java 17**
 - **RestAssured** - для работы с NASA API
@@ -21,10 +34,6 @@
 2. Организации кеширования данных
 3. Принципов работы с JDBC
 4. Обработки исключений
-
-## Установка и запуск
-1. Клонировать репозиторий:
-   git clone https://github.com/ваш-username/mars-photos-explorer.git
 
 # Mars Photos Explorer
 A console application for searching Mars surface photos by specified parameters using NASA's official API. The project implements data caching in a local H2 database to reduce API requests.

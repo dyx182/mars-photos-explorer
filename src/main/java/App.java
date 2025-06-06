@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        //TODO https://api.nasa.gov/
+        //https://api.nasa.gov/
 
         try (Connection connection = DataBase.getConnection()) {
             NasaApiClient nasaApiClient = new NasaApiClient();
